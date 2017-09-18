@@ -52,7 +52,7 @@ export class LinkedListStack<T> implements Stack<T> {
 
     push(data: T) { this.stack.addFirst(data) }
     pop(): T {
-        let data = this.peek()
+        const data = this.peek()
         this.stack.deleteFirst()
         return data
     }
