@@ -16,10 +16,28 @@ export class ArrayQueue<T> implements Queue<T> {
 }
 
 export class ListQueue<T> implements Queue<T> {
-    enqueue(data: T) { }
-    dequeue(): T { return }
-    isEmpty(): boolean { return }
-    getFirst(): T { return }
+    private front: Node<T>
+    private rear: Node<T>
+
+    enqueue(data: T) {
+        const newNode = new Node(data)
+        if (this.rear == null){
+            this.rear = newNode
+            this.front = newNode
+        } else {
+            this.rear.next = newNode
+            this.rear = newNode
+        }
+    }
+    dequeue(): T { 
+        if (this.isEmpty()) return null
+        const data = this.getFirst()
+        this.front = this.front.next
+        if (this.isEmpty()) this.rear = null
+        return data
+    }
+    isEmpty(): boolean { return this.front == null }
+    getFirst(): T { return this.isEmpty() ? null : this.front.data }
 }
 
 export class LinkedListQueue<T> implements Queue<T> {
