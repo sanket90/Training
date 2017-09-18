@@ -70,4 +70,13 @@ export class SinglyLinkedList<T> implements LinkedList<T> {
     }
 
     isEmpty() { return this.size <= 0 }
+
+    toString() {
+        let str = "["
+        let temp = this.firstNode
+        while (temp) { str.concat(temp.data + ", "); temp = temp.next }
+        str = str.slice(0, -2)
+        str.concat(" ]")
+        return str
+    }
 }
