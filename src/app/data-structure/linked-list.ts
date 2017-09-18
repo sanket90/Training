@@ -8,6 +8,7 @@ export interface LinkedList<T> {
     deleteFirst()
     deleteLast()
     delete(index: number)
+    isEmpty(): boolean
 }
 
 export class SinglyLinkedList<T> implements LinkedList<T> {
@@ -68,5 +69,5 @@ export class SinglyLinkedList<T> implements LinkedList<T> {
         this.size--;
     }
 
-    private isEmpty() { return this.size <= 0 }
+    isEmpty() { return this.size <= 0 }
 }
