@@ -37,6 +37,14 @@ export class ListStack<T> implements Stack<T> {
     }
     peek(): T { return this.isEmpty() ? null : this.top.data }
     isEmpty(): boolean { return this.top == null }
+    toString() {
+        let str = "["
+        let temp = this.top
+        while (temp) { str.concat(temp.data + ", "); temp = temp.next }
+        str = str.slice(0, -2)
+        str.concat(" ]")
+        return str
+    }
 }
 
 export class LinkedListStack<T> implements Stack<T> {
@@ -50,4 +58,5 @@ export class LinkedListStack<T> implements Stack<T> {
     }
     peek(): T { return this.stack.first() }
     isEmpty(): boolean { return this.stack.isEmpty() }
+    toString() { return this.stack.toString() }
 }
