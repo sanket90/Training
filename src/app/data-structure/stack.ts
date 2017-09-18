@@ -1,4 +1,5 @@
 import { Node } from './node';
+import { SinglyLinkedList } from './linked-list';
 
 export interface Stack<T> {
     push(data: T)
@@ -25,7 +26,7 @@ export class ArrayStack<T> implements Stack<T> {
 }
 
 export class ListStack<T> implements Stack<T> {
-    private top : Node<T>
+    private top: Node<T>
 
     push(data: T) { this.top = new Node(data, this.top) }
     pop(): T {
@@ -36,4 +37,17 @@ export class ListStack<T> implements Stack<T> {
     }
     peek(): T { return this.isEmpty() ? null : this.top.data }
     isEmpty(): boolean { return this.top == null }
+}
+
+export class LinkedListStack<T> implements Stack<T> {
+    private stack = new SinglyLinkedList<T>()
+
+    push(data: T) { this.stack.addFirst(data) }
+    pop(): T {
+        let data = this.peek()
+        this.stack.deleteFirst()
+        return data
+    }
+    peek(): T { return this.stack.first() }
+    isEmpty(): boolean { return this.stack.isEmpty() }
 }
