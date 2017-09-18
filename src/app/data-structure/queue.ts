@@ -8,20 +8,13 @@ export interface Queue<T> {
     getFirst(): T
 }
 
-export class ArrayQueue<T> implements Queue<T> {
-    enqueue(data: T) { }
-    dequeue(): T { return }
-    isEmpty(): boolean { return }
-    getFirst(): T { return }
-}
-
 export class ListQueue<T> implements Queue<T> {
     private front: Node<T>
     private rear: Node<T>
 
     enqueue(data: T) {
         const newNode = new Node(data)
-        if (this.rear == null){
+        if (this.rear == null) {
             this.rear = newNode
             this.front = newNode
         } else {
@@ -29,7 +22,7 @@ export class ListQueue<T> implements Queue<T> {
             this.rear = newNode
         }
     }
-    dequeue(): T { 
+    dequeue(): T {
         if (this.isEmpty()) return null
         const data = this.getFirst()
         this.front = this.front.next
