@@ -1,8 +1,8 @@
 import { ListStack } from '../data-structure/stack';
 
-class Postfix {
+export class Postfix {
     private postfix: string
-    private stack : ListStack<string>;
+    private stack: ListStack<string>;
 
     fromInfixToPostfix(infix: string): string {
         this.postfix = ""
@@ -10,7 +10,7 @@ class Postfix {
 
         let eqArr = this.toArray(infix)
         eqArr.forEach(char => this.do(char));
-        
+
         this.popUntillNotEmptry()
 
         return this.postfix
@@ -19,18 +19,18 @@ class Postfix {
     private do = (char) => {
         switch (char) {
             case this.isOperand(char):
-                this.postfix.concat(char); 
+                this.postfix.concat(char);
                 break;
 
-            case this.isOpeningBracket(char): 
-                this.stack.push(char); 
+            case this.isOpeningBracket(char):
+                this.stack.push(char);
                 break;
 
             case this.isClosingBracket(char):
                 this.processClosingBracket();
                 break;
 
-            default: 
+            default:
                 this.processOperator(char)
                 break;
         }
@@ -40,9 +40,9 @@ class Postfix {
 
     private isOperand(char): boolean { return /^[a-zA-Z0-9]+$/i.test(char) }
 
-    private isOpeningBracket(char): boolean { return char==="(" }
+    private isOpeningBracket(char): boolean { return char === "(" }
 
-    private isClosingBracket(char): boolean { return char===")" }
+    private isClosingBracket(char): boolean { return char === ")" }
 
     private processClosingBracket() {
         while (!this.stack.isEmpty() && this.stack.peek() != "(") this.postfix.concat(this.stack.pop())
