@@ -1,13 +1,13 @@
 import { Postfix } from './postfix';
 
 class Prefix {
-    fromInfixToPostfix(infix: string): string {
+    fromInfix(infix: string): string {
         let reverseInfix = this.reverse(infix)
         let eqArr = this.toArray(infix)
         eqArr.forEach(char => this.do(char));
         reverseInfix = eqArr.join()
 
-        let postfix = new Postfix().fromInfixToPostfix(reverseInfix)
+        let postfix = new Postfix().fromInfix(reverseInfix)
 
         let prefix = this.reverse(postfix)
         return prefix

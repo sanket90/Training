@@ -4,7 +4,7 @@ export class Postfix {
     private postfix: string
     private stack: ListStack<string>;
 
-    fromInfixToPostfix(infix: string): string {
+    fromInfix(infix: string): string {
         this.postfix = ""
         this.stack = new ListStack<string>()
 
