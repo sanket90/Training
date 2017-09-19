@@ -12,7 +12,10 @@ export class ArrayStack<T> implements Stack<T> {
     private dataArr: T[] = Array<T>()
     private top = -1
 
-    push(data: T) { this.dataArr[this.top++] = data }
+    push(data: T) {
+        this.top++
+        this.dataArr[this.top] = data
+    }
     pop(): T {
         if (this.isEmpty()) return null
         const data = this.peek();
@@ -21,7 +24,7 @@ export class ArrayStack<T> implements Stack<T> {
         return data
     }
     peek(): T { return (this.isEmpty()) ? null : this.dataArr[this.top] }
-    isEmpty(): boolean { return this.top == 1 }
+    isEmpty(): boolean { return this.top == -1 }
     toString() { return this.dataArr.toString() }
 }
 
