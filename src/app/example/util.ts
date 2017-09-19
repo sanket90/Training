@@ -2,7 +2,8 @@ export function reverse(str) { return str.split('').reverse().join('') }
 
 export function toArray(eqn: string) { return Array.from(eqn) }
 
-export function isOperand(char): boolean { return /^[a-zA-Z0-9]+$/i.test(char) }
+//export function isOperand(char: string): boolean { return char.toUpperCase() !== char.toLowerCase() }
+export function isOperand(char): boolean { return /^[a-zA-Z0-9]+$/.test(char) }
 
 export function isOpeningBracket(char): boolean { return char === "(" }
 
