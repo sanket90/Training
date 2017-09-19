@@ -1,28 +1,21 @@
+import * as util from './util';
 import { Postfix } from './postfix';
 
 class Prefix {
     fromInfix(infix: string): string {
-        let reverseInfix = this.reverse(infix)
-        let eqArr = this.toArray(infix)
+        let reverseInfix = util.reverse(infix)
+        let eqArr = util.toArray(infix)
         eqArr.forEach(char => this.do(char));
         reverseInfix = eqArr.join()
 
         let postfix = new Postfix().fromInfix(reverseInfix)
 
-        let prefix = this.reverse(postfix)
+        let prefix = util.reverse(postfix)
         return prefix
     }
 
     private do = (char) => {
-        if (this.isOpeningBracket(char)) char = ")"
-        if (this.isClosingBracket(char)) char = "("
+        if (util.isOpeningBracket(char)) char = ")"
+        if (util.isClosingBracket(char)) char = "("
     }
-
-    private reverse(str) { return str.split('').reverse().join('') }
-
-    private toArray(eqn: string) { return Array.from(eqn) }
-
-    private isOpeningBracket(char): boolean { return char === "(" }
-
-    private isClosingBracket(char): boolean { return char === ")" }
 }

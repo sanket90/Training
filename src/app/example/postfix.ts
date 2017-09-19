@@ -1,3 +1,4 @@
+import * as util from './util';
 import { ListStack } from '../data-structure/stack';
 
 export class Postfix {
@@ -8,7 +9,7 @@ export class Postfix {
         this.postfix = ""
         this.stack = new ListStack<string>()
 
-        let eqArr = this.toArray(infix)
+        let eqArr = util.toArray(infix)
         eqArr.forEach(char => this.do(char));
 
         this.popUntillNotEmptry()
@@ -18,15 +19,15 @@ export class Postfix {
 
     private do = (char) => {
         switch (char) {
-            case this.isOperand(char):
+            case util.isOperand(char):
                 this.postfix.concat(char);
                 break;
 
-            case this.isOpeningBracket(char):
+            case util.isOpeningBracket(char):
                 this.stack.push(char);
                 break;
 
-            case this.isClosingBracket(char):
+            case util.isClosingBracket(char):
                 this.processClosingBracket();
                 break;
 
@@ -36,39 +37,16 @@ export class Postfix {
         }
     }
 
-    private toArray(eqn: string) { return Array.from(eqn) }
-
-    private isOperand(char): boolean { return /^[a-zA-Z0-9]+$/i.test(char) }
-
-    private isOpeningBracket(char): boolean { return char === "(" }
-
-    private isClosingBracket(char): boolean { return char === ")" }
-
     private processClosingBracket() {
-        while (!this.stack.isEmpty() && this.stack.peek() != "(") this.postfix.concat(this.stack.pop())
+        while (!this.stack.isEmpty() && !util.isOpeningBracket(this.stack.peek())) this.postfix.concat(this.stack.pop())
         this.stack.pop()
     }
 
     private processOperator(char) {
-        while (!this.stack.isEmpty() && this.precedence(char) <= this.precedence(this.stack.peek())) {
+        while (!this.stack.isEmpty() && util.precedence(char) <= util.precedence(this.stack.peek())) {
             this.postfix.concat(this.stack.pop())
         }
         this.stack.push(char)
-    }
-
-    private precedence(char): number {
-        switch (char) {
-            case '+':
-            case '-':
-                return 1;
-            case '*':
-            case '/':
-                return 2;
-            case '^':
-                return 3;
-            default:
-                return -1;
-        }
     }
 
     private popUntillNotEmptry() { while (!this.stack.isEmpty()) this.postfix.concat(this.stack.pop()) }
